@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>友情链接 | 😄豐Dの个人博客</title>
+  <title>Android 12 行为变更 | 😄豐Dの个人博客</title>
 
   
     
@@ -534,7 +534,7 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/11.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/img/android12-hero.svg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
@@ -545,7 +545,7 @@
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
           <script>
             var typed = new Typed("#post-detail-header-title", {
-              strings: ['friends'],
+              strings: ['Android 12 行为变更'],
               startDelay: 100,
               typeSpeed: 100,
               loop: false,
@@ -575,10 +575,116 @@
       
       <div class="post-tags-categories">
         
+        <div class="tags">
+          <i class="iconfont icontag"></i>
+          
+            <a href="/tags/Android-12/" class="">
+              Android 12
+            </a>
+          
+        </div>
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/Android/" class="">
+              Android
+            </a>
+          
+        </div>
         
       </div>
       <div class="post-content">
-        
+        <h2 id="用户体验"><a href="#用户体验" class="headerlink" title="用户体验"></a>用户体验</h2><h3 id="沉浸式手势导航改进"><a href="#沉浸式手势导航改进" class="headerlink" title="沉浸式手势导航改进"></a>沉浸式手势导航改进</h3><p>Android 12简化了沉浸式模式，使手势导航更加轻松，并且与观看视频和读书等活动的其余部分更加一致。应用仍然可以<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE">防止</a> 全屏游戏体验中的<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE">意外手势</a>，因此用户在玩游戏时不会意外退出游戏；现在，所有其他全屏或身临其境的体验都允许用户一键浏览手机。</p>
+<p>要做到这一点，对于非粘性身临其境的体验现有的行为（<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_TOUCH"><code>BEHAVIOR_SHOW_BARS_BY_TOUCH</code></a>， <a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_SWIPE"><code>BEHAVIOR_SHOW_BARS_BY_SWIPE</code></a>）已被弃用Android中12开始，他们已被替换缺省行为（<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_DEFAULT"><code>BEHAVIOR_DEFAULT</code></a>），允许比划着一个刷卡隐藏系统栏时。此标志根据模式显示不同的视觉和功能行为：</p>
+<ul>
+<li>  在三键模式下，视觉和功能行为与12之前的Android版本中的沉浸模式相同。</li>
+<li>在手势导航模式下，行为如下：<ul>
+<li>  在视觉上，它与Android 11及更低版本中的沉浸模式相同。</li>
+<li>  从功能上讲，即使隐藏了栏，也允许使用手势。系统后部仅需要一次滑动即可调用，而无需使用Android 11的两次滑动。无需其他滑动即可拉下通知栏或开始回家。</li>
+</ul>
+</li>
+</ul>
+<p><a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE"><code>BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</code></a>对于Android 12，粘性沉浸模式（）并未更改。请注意此功能具有以下向后兼容性：</p>
+<ul>
+<li>对于以Android 11和更低版本为目标的在Android 12上运行的应用：<ul>
+<li>  <code>BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</code> 在功能和视觉上都表现相同。</li>
+<li>  默认设置映射到<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_SWIPE"><code>BEHAVIOR_SHOW_BARS_BY_SWIPE</code></a>。</li>
+</ul>
+</li>
+<li>对于在Android 11（API级别30）及更低版本（针对Android 12）上运行的应用：<ul>
+<li>  除了<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_TOUCH"><code>BEHAVIOR_SHOW_BARS_BY_TOUCH</code></a> 映射到之外，预期具有相同的行为<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_SWIPE"><code>BEHAVIOR_SHOW_BARS_BY_SWIPE</code></a>。</li>
+<li>  确保将您的SDK级别更新为新的默认值（<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_SWIPE"><code>BEHAVIOR_SHOW_BARS_BY_SWIPE</code></a>）。否则，<a href="/reference/android/view/WindowInsetsController#BEHAVIOR_SHOW_BARS_BY_TOUCH"><code>BEHAVIOR_SHOW_BARS_BY_TOUCH</code></a> 保留默认值。</li>
+</ul>
+</li>
+</ul>
+<h3 id="前台服务通知延迟"><a href="#前台服务通知延迟" class="headerlink" title="前台服务通知延迟"></a>前台服务通知延迟</h3><p>为了为Android 12上的短期运行的<a href="/guide/components/foreground-services">前台服务</a>提供简化的体验，系统可以将某些前台服务的前台服务通知显示延迟10秒。此更改使短期任务有机会在其通知出现之前完成。</p>
+<p>如果前台服务至少具有以下特征之一，则系统在服务启动后立即显示关联的通知：</p>
+<ul>
+<li>  该服务与包含<a href="/training/notify-user/build-notification#Actions">操作按钮</a>的通知关联。</li>
+<li>  该服务拥有 <a href="/guide/topics/manifest/service-element#foregroundservicetype"><code>foregroundServiceType</code></a> 的<code>connectedDevice</code>，<code>mediaPlayback</code>，<code>mediaProjection</code>，或<code>phoneCall</code>。</li>
+<li>该服务提供了在通知的<a href="/reference/android/app/Notification#category">category属性中</a>定义的与电话，导航或媒体播放有关的用例。  <strong>注意：</strong>这些用例可能会在将来的Android 12 Developer Preview版本中进行更改。</li>
+<li>该服务已通过<a href="/reference/android/app/Notification.Builder#setShowForegroundImmediately(boolean)"><code>setShowForegroundImmediately()</code></a> 在设置通知时进行调用来退出行为更改 。</li>
+</ul>
+<h2 id="隐私"><a href="#隐私" class="headerlink" title="隐私"></a>隐私</h2><h3 id="Netlink-MAC地址限制"><a href="#Netlink-MAC地址限制" class="headerlink" title="Netlink MAC地址限制"></a>Netlink MAC地址限制</h3><p>Android 12进一步限制了所有非系统应用程序对设备MAC地址（不可重置的标识符）的访问，无论目标API级别如何。</p>
+<p>相关API会返回空值或占位符值，具体取决于应用程序的目标SDK版本：</p>
+<ul>
+<li>  如果您的应用针对Android 12，则API返回null。</li>
+<li>  如果您的应用定位到Android 11或更低版本，则API返回硬编码的占位符值： <code>02:00:00:00:00:00</code></li>
+</ul>
+<p>开发人员应该使用<a href="/reference/android/net/ConnectivityManager"><code>ConnectivityManager</code></a> ，而不是低级别的API，如<a href="/reference/java/net/NetworkInterface"><code>NetworkInterface</code></a>， <code>getifaddrs()</code>或网络链路插槽。当开发人员调用<code>NetworkInterface.getHardwareAddress()</code> 其代码时，logcat输出显示： <code>CompatibilityChangeReporter: Compat change id reported: 170188668;</code></p>
+<p>开发人员可以使用调用的兼容性标志<code>[RETURN_NULL_HARDWARE_ADDRESS](/reference/compat-framework-changes?db=dac-team#return_null_hardware_address)</code> 来切换<code>NetworkInterface.getHardwareAddress()</code> 启用或<code>02:00:00:00:00:00</code>禁用时返回null的行为。</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><h3 id="不信任的触摸事件被阻止"><a href="#不信任的触摸事件被阻止" class="headerlink" title="不信任的触摸事件被阻止"></a>不信任的触摸事件被阻止</h3><p>为了维护系统安全性和良好的用户体验，Android 12会阻止应用程序在覆盖层以不安全的方式遮盖应用程序时使用<a href="/training/gestures">触摸事件</a>。换句话说，系统会阻止通过某些窗口的触摸，但<a href="#untrusted-touch-events-exceptions">有一些例外</a>。</p>
+<h4 id="受影响的应用"><a href="#受影响的应用" class="headerlink" title="受影响的应用"></a>受影响的应用</h4><p>此更改会影响选择让触摸通过其窗口（例如通过使用 <a href="/reference/android/view/WindowManager.LayoutParams#FLAG_NOT_TOUCHABLE"><code>FLAG_NOT_TOUCHABLE</code></a> 标志）的应用。几个示例包括但不限于以下示例：</p>
+<ul>
+<li>  需要<a href="/reference/android/Manifest.permission#SYSTEM_ALERT_WINDOW"><code>SYSTEM_ALERT_WINDOW</code></a> 权限的叠加层 ，例如使用<a href="/reference/android/view/WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY"><code>TYPE_APPLICATION_OVERLAY</code></a>，使用<code>FLAG_NOT_TOUCHABLE</code>标志的窗口 。</li>
+<li>  使用该<code>FLAG_NOT_TOUCHABLE</code>标志的活动窗口。</li>
+<li>  <a href="/guide/topics/ui/notifiers/toasts">敬酒消息</a>。</li>
+</ul>
+<h4 id="例外情况"><a href="#例外情况" class="headerlink" title="例外情况"></a>例外情况</h4><p>在以下情况下，允许“通过”触摸：</p>
+<ul>
+<li>  <strong>您的应用内的互动。</strong>您的应用会显示叠加层，并且叠加层仅在用户与您的应用进行交互时才会显示。</li>
+<li><strong>受信任的窗口。</strong>这些窗口包括（但不限于）以下内容：<ul>
+<li><p>  <a href="/reference/android/view/WindowManager.LayoutParams#TYPE_ACCESSIBILITY_OVERLAY">辅助功能窗口</a></p>
+</li>
+<li><p>  <a href="/reference/android/view/WindowManager.LayoutParams#TYPE_INPUT_METHOD">输入法编辑器（IME）窗口</a></p>
+</li>
+<li><p><a href="/reference/android/view/WindowManager.LayoutParams#FLAG_NOT_TOUCHABLE">助手窗口</a></p>
+</li>
+<li><p>*注意：<strong>Windows类型 **不受</strong>信任。<a href="/reference/android/view/WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY"><code>TYPE_APPLICATION_OVERLAY</code></a></p>
+</li>
+</ul>
+</li>
+<li><strong>隐形窗户。</strong>窗口的根视图为 <a href="/reference/android/view/View#GONE"><code>GONE</code></a>或 <a href="/reference/android/view/View#INVISIBLE"><code>INVISIBLE</code></a>。</li>
+<li><strong>完全透明的窗口。</strong>该<a href="/reference/android/view/WindowManager.LayoutParams#alpha"><code>alpha</code></a>窗口的 属性为0.0。</li>
+<li><strong>足够透明的系统警报窗口。</strong>当组合的不透明度小于或等于系统对触摸的最大遮盖不透明度时，系统认为一组系统警报窗口是足够透明的。在Developer Preview 1中，最大不透明度为0.8，但是此值稍后可能在Developer Preview中更改。</li>
+</ul>
+<h4 id="检测何时阻止了不受信任的触摸"><a href="#检测何时阻止了不受信任的触摸" class="headerlink" title="检测何时阻止了不受信任的触摸"></a>检测何时阻止了不受信任的触摸</h4><p>如果触摸动作被系统阻止， <a href="/studio/command-line/logcat">Logcat会</a>记录以下消息：</p>
+<pre><code>Untrusted touch due to occlusion by PACKAGE_NAME
+</code></pre>
+<h4 id="测试变更"><a href="#测试变更" class="headerlink" title="测试变更"></a>测试变更</h4><p>默认情况下，在运行Android 12 Developer Preview 1的设备上，不信任的触摸被阻止。要允许不信任的触摸，请在终端窗口中运行以下<a href="/studio/command-line/adb">ADB命令</a>：</p>
+<p>＃特定的应用程序<br>adb shell可以禁用BLOCK_UNTRUSTED_TOUCHES com 。例子。应用程序  </p>
+<p>＃所有应用程序＃如果在触摸被阻止时仍希望看到Logcat消息警告，请使用1而不是0。adb shell设置将global block_untrusted_touches 0  </p>
+<p>要将行为恢复为默认行为（阻止了不信任的触摸），请运行以下命令：</p>
+<p>＃一个特定的应用程序<br>adb shell兼容重置BLOCK_UNTRUSTED_TOUCHES com 。例子。应用程序  </p>
+<p>＃所有应用程序<br>adb shell设置都放入全局block_untrusted_touches 2  </p>
+<h3 id="应用无法关闭系统"><a href="#应用无法关闭系统" class="headerlink" title="应用无法关闭系统"></a>应用无法关闭系统</h3><p>为了在与应用程序和系统进行交互时改善用户控制，从 <a href="/reference/android/content/Intent#ACTION_CLOSE_SYSTEM_DIALOGS"><code>ACTION_CLOSE_SYSTEM_DIALOGS</code></a> Android 12开始不推荐使用intent操作。除<a href="#close-system-dialogs-exceptions">少数特殊情况外</a>，当您的应用程序尝试<a href="/guide/components/intents-filters">调用</a>包含此操作<a href="/guide/components/intents-filters">的intent时</a>，系统会执行以下操作之一在您应用的目标SDK版本上：</p>
+<ul>
+<li>  如果您的应用程序以Android 12为目标，<a href="/reference/java/lang/SecurityException"><code>SecurityException</code></a>则会出现a 。</li>
+<li>如果您的应用定位到Android 11（API级别30）或更低版本，则该意图不会执行，并且<a href="/studio/command-line/logcat">Logcat中会</a>显示以下消息 ：  E ActivityTaskManager权限被拒绝：\<br>  从\广播的android.intent.action.CLOSE_SYSTEM_DIALOGS<br>  com.package.name需要android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS，\<br>  放下广播。</li>
+</ul>
+<h4 id="例外情况-1"><a href="#例外情况-1" class="headerlink" title="例外情况"></a>例外情况</h4><p>在以下情况下，应用仍可以在Android 12上关闭系统对话框：</p>
+<ul>
+<li>  您的应用正在运行<a href="/training/testing/unit-testing/instrumented-unit-tests">测试</a>。</li>
+<li>您的应用定位到Android 11或更低版本，并且在<a target="_blank" rel="noopener" href="https://material.io/design/platform-guidance/android-notifications#behavior">通知抽屉的</a>顶部显示一个窗口。  <strong>注意：</strong>如果您的应用定位到Android 12，则<code>ACTION_CLOSE_SYSTEM_DIALOGS</code>在这种情况下无需使用 。这是因为，如果您的应用程序<a href="/reference/android/content/Context#startActivity(android.content.Intent)"><code>startActivity()</code></a> 在通知抽屉顶部有一个窗口的同时调用 ，则系统会自动关闭通知抽屉。</li>
+<li>您的应用定位到Android 11或更低版本。此外，用户可能已经使用通知的<a href="/training/notify-user/build-notification#Actions">操作按钮</a>与通知进行了交互，并且您的应用正在响应该用户操作来处理<a href="/guide/components/services">服务</a>或<a href="/guide/components/broadcasts">广播接收器</a>。</li>
+</ul>
+<h2 id="非SDK接口限制"><a href="#非SDK接口限制" class="headerlink" title="非SDK接口限制"></a>非SDK接口限制</h2><p>Android 12包括基于与Android开发人员的协作以及最新的内部测试而更新的受限非SDK接口列表。只要有可能，在限制非SDK接口之前，请确保可以使用公共替代方案。</p>
+<p>如果您的应用程序未针对Android 12，则其中的某些更改可能不会立即影响您。但是，尽管您目前可以使用某些非SDK接口（<a href="/guide/app-compatibility/restrictions-non-sdk-interfaces#list-names">取决于应用程序的目标API级别</a>），但是使用任何非SDK方法或字段始终会带来破坏应用程序的高风险。</p>
+<p>如果不确定您的应用程序是否使用非SDK接口，则可以<a href="/guide/app-compatibility/restrictions-non-sdk-interfaces#test-for-non-sdk">测试您的应用程序</a> 以找出答案。如果您的应用依赖于非SDK界面，则应开始计划向SDK替代产品的迁移。不过，我们了解到某些应用程序具有使用非SDK接口的有效用例。如果您找不到在应用程序中为功能使用非SDK接口的替代方法，则应<a href="/guide/app-compatibility/restrictions-non-sdk-interfaces#feature-request">请求一个新的Public API</a>。</p>
+<p>要了解有关此版本Android中的更改的更多信息，请参阅<a href="/about/versions/12/non-sdk-12">Android 12中非SDK接口限制的更新</a>。要大致了解有关非SDK接口的更多信息，请参阅<a href="/guide/app-compatibility/restrictions-non-sdk-interfaces">非SDK接口限制</a>。</p>
+
       </div>
       
     </article>
@@ -590,6 +696,25 @@
 
 
 
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/img/xian.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2020/10/03/2021-04/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fa fa-angle-right"></i>
+        <div>长安秋望</div>
+      </div>
+      <!-- <div class="content">
+        
+楼倚霜树外，镜天无一毫。
+南山与秋色，气势两相高。
+
+      </div> -->
+    </a>
+  </div>
 
 </div>
 
