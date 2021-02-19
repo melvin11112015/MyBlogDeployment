@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>归档 | 😄豐Dの个人博客</title>
+  <title>NDK相关(4) | 😄豐Dの个人博客</title>
 
   
     
@@ -410,116 +410,380 @@
     
 </header>
     <main class="main" style="margin-top: 60px;">
-      <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="lazyload archive-header" data-original="/medias/archive.jpg" style="width: 100%;height: 50vh;overflow: hidden;background-size: cover; 
-background-position: center center;">
-<!-- <span class="title">归档</span> -->
-</div>
-<div class="archive-main">
-  <section class="archive">
-    <div class="archive-content">
-      <ul class="post-archive">
-        
-        
-          
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2021">2021</a>
-            </div>
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">02-19</span>
-            <a class="post-title" href="/2021/02/19/2021-05/">Android 12 行为变更</a>
-          </li>
-        
-          
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2020">2020</a>
-            </div>
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">10-03</span>
-            <a class="post-title" href="/2020/10/03/2021-04/">长安秋望</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">07-11</span>
-            <a class="post-title" href="/2020/07/11/2021-14/">Android 11 行为变更</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">07-11</span>
-            <a class="post-title" href="/2020/07/11/2021-15/">分区存储</a>
-          </li>
-        
-          
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2015">2015</a>
-            </div>
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-15</span>
-            <a class="post-title" href="/2015/11/15/2021-12/">NDK相关(6)</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-15</span>
-            <a class="post-title" href="/2015/11/15/2021-11/">NDK相关(5)</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-14</span>
-            <a class="post-title" href="/2015/11/14/2021-10/">NDK相关(4)</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-14</span>
-            <a class="post-title" href="/2015/11/14/2021-09/">NDK相关(3)</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-14</span>
-            <a class="post-title" href="/2015/11/14/2021-08/">NDK相关(2)</a>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            <span class="post-date">11-13</span>
-            <a class="post-title" href="/2015/11/13/2021-07/">NDK相关(1)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </section>
-  
-  <!-- <nav class="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">下一页</a>
-  </nav> -->
-  <div class="page-nav">
-    
-    <div class="page-info">
-        <div class="page-info-text">1 / 2</div>
-    </div>
-    
-      <a href="/archives/page/2/"
-         class="page-nav-next">
-          <span class="mr-5">下一页</span><i class="fa fa-angle-right"></i>
-      </a>
       
+ <!-- prismjs 代码高亮 -->
+ 
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg')
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/11.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
+  
+    <div class="title-box">
+      
+        <span class="title" id="post-detail-header-title"></span>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+          <script>
+            var typed = new Typed("#post-detail-header-title", {
+              strings: ['NDK相关(4)'],
+              startDelay: 100,
+              typeSpeed: 100,
+              loop: false,
+              backSpeed: 50,
+              showCursor: false
+            });
+          </script>
+        
+    </div>
+  
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      
+      <div class="post-meta">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span class="post-time">2015-11-14</span>
+      </div>
+      
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          <i class="iconfont icontag"></i>
+          
+            <a href="/tags/Android-NDK/" class="">
+              Android NDK
+            </a>
+          
+        </div>
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/Android/" class="">
+              Android
+            </a>
+          
+        </div>
+        
+      </div>
+      <div class="post-content">
+        <h3 id="2-1-3、堆和栈究竟有什么区别"><a href="#2-1-3、堆和栈究竟有什么区别" class="headerlink" title="2.1.3、堆和栈究竟有什么区别"></a>2.1.3、堆和栈究竟有什么区别</h3><p>好了，我们回到我们的主题：堆和栈究竟有什么区别？<br>主要的区别由以下几点:</p>
+<p>(1). 管理方式不同</p>
+<p>(2). 空间大小不同</p>
+<p>(3). 能否产生碎片不同</p>
+<p>(4). 生长方向不同</p>
+<p>(5). 分配方式不同</p>
+<p>(6). 分配效率不同</p>
+<p>管理方式：对于栈来讲，是由编译器自动管理，无需我们手工控制；对于堆来说，<br>释放工作由程序员控制，容易产生 memory leak。</p>
+<p>空间大小：一般来讲在 32 位系统下，堆内存可以达到 4G 的空间，从这个角度<br>来看堆内存几乎是没有什么限制的。但是对于栈来讲，一般都是有一定的空间大<br>小的，例如，在 VC6 下面，默认的栈空间大小是 1M（好像是，记不清楚了）。</p>
+<p>当然，我们可以修改：<br>打开工程，依次操作菜单如下：Project-&gt;Setting-&gt;Link，在 Category 中选中<br>Output，然后在 Reserve 中设定堆栈的最大值和 commit。</p>
+<p>注意：reserve 最小值为 4Byte；commit 是保留在虚拟内存的页文件里面，它设<br>置的较大会使栈开辟较大的值，可能增加内存的开销和启动时间。<br>碎片问题：对于堆来讲，频繁的 new/delete 势必会造成内存空间的不连续，从<br>而造成大量的碎片，使程序效率降低。对于栈来讲，则不会存在这个问题，因为<br>栈是先进后出的队列，他们是如此的一一对应，以至于永远都不可能有一个内存<br>块从栈中间弹出，在他弹出之前，在他上面的后进的栈内容已经被弹出，详细的<br>可以参考数据结构，这里我们就不再一一讨论了。<br>生长方向：对于堆来讲，生长方向是向上的，也就是向着内存地址增加的方向；<br>对于栈来讲，它的生长方向是向下的，是向着内存地址减小的方向增长。<br>分配方式：堆都是动态分配的，没有静态分配的堆。栈有 2 种分配方式：静态分<br>配和动态分配。静态分配是编译器完成的，比如局部变量的分配。动态分配由<br>alloca 函数进行分配，但是栈的动态分配和堆是不同的，他的动态分配是由编译<br>器进行释放，无需我们手工实现。</p>
+<p>分配效率：栈是机器系统提供的数据结构，计算机会在底层对栈提供支持：分配<br>专门的寄存器存放栈的地址，压栈出栈都有专门的指令执行，这就决定了栈的效<br>率比较高。堆则是 C/C++函数库提供的，它的机制是很复杂的，例如为了分配<br>一块内存，库函数会按照一定的算法（具体的算法可以参考数据结构/操作系统）<br>在堆内存中搜索可用的足够大小的空间，如果没有足够大小的空间（可能是由于<br>内存碎片太多），就有可能调用系统功能去增加程序数据段的内存空间，这样就<br>有机会分到足够大小的内存，然后进行返回。显然，堆的效率比栈要低得多。</p>
+<p>从这里我们可以看到，堆和栈相比，由于大量 new/delete 的使用，容易造成大<br>量的内存碎片；由于没有专门的系统支持，效率很低；由于可能引发用户态和核<br>心态的切换，内存的申请，代价变得更加昂贵。所以栈在程序中是应用最广泛的，<br>就算是函数的调用也利用栈去完成，函数调用过程中的参数，返回地址，EBP 和<br>局部变量都采用栈的方式存放。所以，我们推荐大家尽量用栈，而不是用堆。<br>虽然栈有如此众多的好处，但是由于和堆相比不是那么灵活，有时候分配大量的<br>内存空间，还是用堆好一些。</p>
+<p>无论是堆还是栈，都要防止越界现象的发生（除非你是故意使其越界），因为越<br>界的结果要么是程序崩溃，要么是摧毁程序的堆、栈结构，产生以想不到的结果,<br>就算是在你的程序运行过程中，没有发生上面的问题，你还是要小心，说不定什<br>么时候就崩掉，那时候 debug 可是相当困难的：）</p>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/10.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2015/11/15/2021-11/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> 上一篇:
+        <div>NDK相关(5)</div>
+      </div>
+      
+      <!-- <div class="content">
+        2.2、控制 C++的内存分配在嵌入式系统中使用 C++的一个常见问题是内存分配，即对 new 和 delete 操作符
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2015/11/14/2021-09/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fa fa-angle-right"></i>
+        <div>NDK相关(3)</div>
+      </div>
+      <!-- <div class="content">
+        C/C++内存管理详解
+2.1、内存分配方式2.1.1 简介在 C++中，内存分成 5 个区，他们分别是堆、栈、自由存储
+      </div> -->
+    </a>
   </div>
 
 </div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+    
+    <!-- 评论 -->
+      
+        <div id="myComment">
+          
+        </div>
+      
+  </div>
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>本文目录</span>
+          <div class="toc-open-close">本文目录</div>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+.toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+}
+</style>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    </script>
+  
+</div>
+
+
     </main>
     <div class="footer bg-color">
   <div class="footer-main">
