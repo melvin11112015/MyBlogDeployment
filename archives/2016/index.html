@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>NDK相关(2) | 😄豐Dの个人博客</title>
+  <title>归档: 2016 | 😄豐Dの个人博客</title>
 
   
     
@@ -410,384 +410,46 @@
     
 </header>
     <main class="main" style="margin-top: 60px;">
-      
- <!-- prismjs 代码高亮 -->
- 
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
-    <transition-group tag="ul" :name="names">
-        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-            <img :src="image" class="bg-swiper-img">
-        </li>
-    </transition-group>
+      <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="lazyload archive-header" data-original="/medias/archive.jpg" style="width: 100%;height: 50vh;overflow: hidden;background-size: cover; 
+background-position: center center;">
+<!-- <span class="title">归档</span> -->
 </div>
-<script>
-    var vm = new Vue({
-        el: '#appBgSwiper',
-        data: {
-            names: '' || 'fade' || 'fade', // translate-fade fade
-            mark: 0,
-            img: [],
-            bgColor: '',
-            time: null
-        },
-        methods: {   //添加方法
-            change(i, m) {
-                if (i > m) {
-                    // this.names = 'fade';
-                } else if (i < m) {
-                    // this.names = 'fade';
-                } else {
-                    return;
-                }
-                this.mark = i;
-            },
-            prev() {
-                // this.names = 'fade';
-                this.mark--;
-                if (this.mark === -1) {
-                    this.mark = 3;
-                    return
-                }
-            },
-            next() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            autoPlay() {
-                // this.names = 'fade';
-                this.mark++;
-                if (this.mark === this.img.length) {
-                    this.mark = 0;
-                    return
-                }
-            },
-            play() {
-                let bgImgDelay = '' || '180000'
-                let delay = parseInt(bgImgDelay) || 180000;
-                this.time = setInterval(this.autoPlay, delay);
-            },
-            enter() {
-                clearInterval(this.time);
-            },
-            leave() {
-                this.play();
-            }
-        },
-        created() {
-            this.play()
-        },
-        beforeDestroy() {
-            clearInterval(this.time);
-        },
-        mounted() {
-            let prop = ''|| '';
-            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg')
-            if (isImg) {
-                let img = prop.split(',');
-                let configRoot = '/'
-                let arrImg = [];
-                img.forEach(el => {
-                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-			        var objExp = new RegExp(Expression);
-
-                    if(objExp.test(el)) {
-                        // http or https
-                        arrImg.push(el);
-                    } else {
-                        // 非http or https开头
-                        // 本地文件
-                        let firstStr = el.charAt(0);
-                        if (firstStr == '/') {
-                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-                        }
-                        el = configRoot + el;
-                        arrImg.push(el);
-                    }
-                })
-                this.img = arrImg;
-            } else {
-                this.bgColor = prop;
-            }
-        }
-    })
-</script>
-
-<style>
-    .bg-swiper-box {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    .bg-swiper-img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
-
-
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/13.jpg" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
-  
-    <div class="title-box">
-      
-        <span class="title" id="post-detail-header-title"></span>
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-          <script>
-            var typed = new Typed("#post-detail-header-title", {
-              strings: ['NDK相关(2)'],
-              startDelay: 100,
-              typeSpeed: 100,
-              loop: false,
-              backSpeed: 50,
-              showCursor: false
-            });
-          </script>
+<div class="archive-main">
+  <section class="archive">
+    <div class="archive-content">
+      <ul class="post-archive">
         
+        
+          
+            
+            <div class="year" data-aos="zoom-in-up">
+                <div class="bullet"></div>
+                <a href="/archives/2016">2016</a>
+            </div>
+          
+          <li class="post-item" data-aos="fade-left">
+            <span class="post-date">01-04</span>
+            <a class="post-title" href="/2016/01/04/2021-18/">JNI和Java共享内存空间</a>
+          </li>
+        
+          
+          <li class="post-item" data-aos="fade-left">
+            <span class="post-date">01-03</span>
+            <a class="post-title" href="/2016/01/03/2021-16/">什么是JNI?它主要用来干什么。</a>
+          </li>
+        
+          
+          <li class="post-item" data-aos="fade-left">
+            <span class="post-date">01-03</span>
+            <a class="post-title" href="/2016/01/03/2021-17/">什么是JNI?它主要用来干什么。</a>
+          </li>
+        
+      </ul>
     </div>
-  
-  
-  
-    <script src="/js/bubble/bubble.js"></script>
+  </section>
   
 </div>
-
-
-<div class="row justify-position">
-  <div class="main-content">
-    <article class="post post-detail">
-      
-      
-      <div class="post-meta">
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2015-11-14</span>
-      </div>
-      
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          <i class="iconfont icontag"></i>
-          
-            <a href="/tags/Android-NDK/" class="">
-              Android NDK
-            </a>
-          
-        </div>
-        
-        
-        <div class="categories">
-          <i class="iconfont iconbookmark1"></i>
-          
-            <a href="/categories/Android/" class="">
-              Android
-            </a>
-          
-        </div>
-        
-      </div>
-      <div class="post-content">
-        <h3 id="1-3、栈式存储分配"><a href="#1-3、栈式存储分配" class="headerlink" title="1.3、栈式存储分配"></a>1.3、栈式存储分配</h3><p>在编译时期，过程/函数以及嵌套程序块的活动记录大小（最大值）是可以确定<br>的。这个时候才使用栈式存储分配。因为栈的最大容量固定（windows 中为 2M，<br>有些是 1M），若所需内存大于栈的剩余内存，则溢出。</p>
-<pre><code class="c++">
-#include&lt;stdio.h&gt;//计算两个数的加法 
-int sum(int a,int b)&#123;
-    int c;
-    c =a+b;
-    returna+b;&#125;
-int main(void)&#123;
-int a;
-int b;
-int c;
-c =sum(a,b);
-//打印计算结果
-printf(&quot;%d+%d = %d&quot;,a,b,c);
-return1;
-&#125;
-</code></pre>
-<h3 id="1-4·、堆式存储分配"><a href="#1-4·、堆式存储分配" class="headerlink" title="1.4·、堆式存储分配"></a>1.4·、堆式存储分配</h3><p>从栈式存储中，我们知道，每次函数执行完毕后，都会将当前栈顶活动记录弹出，<br>这意味着变量随着函数执行的结束而丢失。但是有时候我们想要函数结束完之后，<br>当前数据对象长期存在，这时候就该灵活但昂贵的堆发挥作用了。<br>在堆式存储分配时，程序可以在任意时刻，以任意次序从程序的代码区的堆区申<br>请和释放一个数据对象。通常情况下，堆的分配和释放是由程序向操作系统提出<br>的，这也注定了它的分配效率没有栈那么快。<br>两种方式<br>堆式存储空间的分配和释放可以是显式的，也可以是隐式的。<br>（1）显式的是指由程序员来负责应用程序的（堆）存储空间管理，可借助编译<br>器和运行时系统所提供的默认存储管理机制。<br>（2）隐式的是指（堆）存储空间的分配或释放不需要程序员负责，而是由编译<br>器和运行时系统自动完成。<br>某些语言有显式的存储空间分配和释放命令，如 Pascal 中的 new/deposit，C++<br>中的 new/delete。在 C 语言中没有显式的存储空间分配和释放语句，但程序员<br>可以使用标准库中的函数 malloc()和 free()来实现显式的分配和释放。</p>
-
-      </div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2015/11/14/2021-09/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>NDK相关(3)</div>
-      </div>
-      
-      <!-- <div class="content">
-        C/C++内存管理详解
-2.1、内存分配方式2.1.1 简介在 C++中，内存分成 5 个区，他们分别是堆、栈、自由存储
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/14.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2015/11/13/2021-07/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fa fa-angle-right"></i>
-        <div>NDK相关(1)</div>
-      </div>
-      <!-- <div class="content">
-        C 与 C++之内存结构与管理将通过以下两个内容来进行介绍 C 与 C++C/C++程序的内存结构C/C++内存管理详解
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-    
-    <!-- 评论 -->
-      
-        <div id="myComment">
-          
-        </div>
-      
-  </div>
-
-  
-    <div class="toc-aside">
-      <div class="toc-main">
-        <div class="toc-aside-title">
-          <i class="fa fa-list-ul" aria-hidden="true"></i><span>本文目录</span>
-          <div class="toc-open-close">本文目录</div>
-        </div>
-        <div class="toc-content">
-          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script>
-<div class="toc"></div>
-
-<script>
-  if ($('.toc').length > 0) {
-    var headerEl = 'h2, h3, h4',  //headers 
-      content = '.post-detail',//文章容器
-      idArr = {};  //标题数组以确定是否增加索引id
-      //add #id
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: '.toc',
-      // Where to grab the headings to build the table of contents.
-      contentSelector: content,
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: headerEl,
-      scrollSmooth: true,
-      scrollSmoothOffset: -80,
-      headingsOffset: 130,
-      positionFixedSelector: '.toc-main',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  }
-
-</script>
-
-<style>
-.is-position-fixed {
-  position:fixed !important;
-  top: 64px;
-}
-.toc-main ul {
-  counter-reset: show-list;
-}
-.toc-main ul li::before {
-  content: counter(item)".";
-  display: block;
-  position: absolute;
-  left: 12px;
-  top:0;
-}
-.toc > .toc-list {
-  padding-left: 35px;
-}
-.toc>.toc-list li {
-  list-style: decimal;
-}
-.toc-list {
-  padding-left: 25px;
-}
-</style>
-        </div>
-      </div>
-    </div>
-
-    
-
-    <script>
-      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
-      let open = eval('' || 'true');
-      openOrCloseBtn.click(function() {
-        if (open === true) {
-          $(".toc-aside").css({'width': 0, 'padding': 0});
-          $(".toc-content").css({'width': 0});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
-          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
-          open = false;
-        } else {
-          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
-          $(".toc-content").css({'width': '300px'});
-          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
-          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
-          open = true;
-        }
-      });
-    </script>
-  
-</div>
-
-
     </main>
     <div class="footer bg-color">
   <div class="footer-main">

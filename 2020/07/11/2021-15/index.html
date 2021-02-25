@@ -598,18 +598,18 @@
       <div class="post-content">
         <p>android 10提出了分区存储的概念。开发者无法直接获取外部存储的读写权限，用我们平常的话来说就是无法直接读写SD卡上的东西。  </p>
 <h3 id="一-场景举例"><a href="#一-场景举例" class="headerlink" title="一. 场景举例"></a>一. 场景举例</h3><p><strong>PS:如果不知道分区存储是什么个情况，建议在Android11的手机上并设置targetSdkVersion为29，跑一遍应用，写个读写外部存储的操作，看看会发生什么</strong></p>
-<h5 id="1-目标版本targetSdkVersion设置为29以下的情况"><a href="#1-目标版本targetSdkVersion设置为29以下的情况" class="headerlink" title="1. 目标版本targetSdkVersion设置为29以下的情况"></a>1. 目标版本targetSdkVersion设置为29以下的情况</h5><p>这种情况下能正常的读写SD卡的文件，也就是Environment.getExternalStorageDirectory()路径的文件，<strong>我很早之前测试过，好像我记得即便手机是Android10，只要targetSdkVersion不设置超过29也不会有外部存储的读写问题（不对的话请指出）</strong><br>如果是这样的话，最方便的做法就是不把targetSdkVersion设置超过29就不会有问题</p>
-<h5 id="2-使用应用自身的外部存储路径"><a href="#2-使用应用自身的外部存储路径" class="headerlink" title="2. 使用应用自身的外部存储路径"></a>2. 使用应用自身的外部存储路径</h5><p>使用应用自身的外部存储不会受影响，只不过这个路径的文件会在卸载时也会被删除。<br>简单来说就是context.getExternalFilesDir()不受影响， Environment.getExternalStorageDirectory()才受影响。</p>
+<h5 id="1-目标版本targetSdkVersion设置为29以下的情况"><a href="#1-目标版本targetSdkVersion设置为29以下的情况" class="headerlink" title="1. 目标版本targetSdkVersion设置为29以下的情况"></a>1. 目标版本targetSdkVersion设置为29以下的情况</h5><p>这种情况下能正常的读写SD卡的文件，也就是<code>Environment.getExternalStorageDirectory()</code>路径的文件，<strong>我很早之前测试过，好像我记得即便手机是Android10，只要targetSdkVersion不设置超过29也不会有外部存储的读写问题</strong><br>如果是这样的话，最方便的做法就是不把targetSdkVersion设置超过29就不会有问题</p>
+<h5 id="2-使用应用自身的外部存储路径"><a href="#2-使用应用自身的外部存储路径" class="headerlink" title="2. 使用应用自身的外部存储路径"></a>2. 使用应用自身的外部存储路径</h5><p>使用应用自身的外部存储不会受影响，只不过这个路径的文件会在卸载时也会被删除。<br>简单来说就是<code>context.getExternalFilesDir()</code>不受影响， <code>Environment.getExternalStorageDirectory()</code>才受影响。</p>
 <h5 id="3-如何文件再升级前已经存在的情况"><a href="#3-如何文件再升级前已经存在的情况" class="headerlink" title="3. 如何文件再升级前已经存在的情况"></a>3. 如何文件再升级前已经存在的情况</h5><p>怎么去了解这种情况，我举个栗子，手机是Android10，假如第一次装的应用的targetSdkVersion是28，此时是能正常使用原本的Environment.getExternalStorageDirectory()对外部存储文件做读写操作，那么这个文件就存在了。这时候，应用更新，新版本的应用是使用targetSdkVersion设置29的，安装应用（无论覆盖安装还是卸载安装），此时依旧能使用旧的方式读写外部存储，即便手动去文件管理器删除你外部存储的文件，依旧能正常读写。<br>那么返过来，还是上边的栗子，在安装新的应用之前，将旧的应用卸载，并且手动去文件管理器删除你外部存储的文件，意思就是安装前清空掉所有，安装之后，如果使用Environment.getExternalStorageDirectory()对外部存储文件做读写操作，会报错。</p>
 <h5 id="4-设置requestLegacyExternalStorage属性"><a href="#4-设置requestLegacyExternalStorage属性" class="headerlink" title="4. 设置requestLegacyExternalStorage属性"></a>4. 设置requestLegacyExternalStorage属性</h5><p>在Manifest中设置requestLegacyExternalStorage = false能够关闭不使用分区存储，也就是说设置这个属性之后，你依旧能像以前一样正常的读写外部存储的数据。<br>这个方法也是很多人会去使用的一个方法，我刚开始的时候也是使用这个方法，一条代码能解决问题的操作，它不香吗，但是这个方式也会存在问题，下面会说。</p>
 <h5 id="5-根据官网的要求，执行分区存储"><a href="#5-根据官网的要求，执行分区存储" class="headerlink" title="5. 根据官网的要求，执行分区存储"></a>5. 根据官网的要求，执行分区存储</h5><p>其实也有很多博主也写过关于这个方面的内容，无外乎是两种方式，使用MediaStore或存储访问框架(SAF)<br>按照之前我们读写外部公共存储文件的操作一般是这样写的</p>
-<pre><code>String path = Environment.getExternalStorageDirectory()
+<pre><code class="java">String path = Environment.getExternalStorageDirectory()
 String name = &quot;TestFN&quot;
 File file = new File(path, name);
 // todo 然后执行IO流读写
 </code></pre>
 <p>然后如果使用MediaStore的话，举个栗子的吧，就弄一个写文件的Demo，因为网上很多都是图片视频什么的，假如写到Downloads文件夹里</p>
-<pre><code>ContentResolver resolver = getContentResolver();
+<pre><code class="java">ContentResolver resolver = getContentResolver();
 ContentValues values = new ContentValues();
 values.put(MediaStore.Downloads.DISPLAY_NAME, &quot;FILENAME&quot;);
  //设置文件类型（有哪些类型网上很容易查到，如果不设置的话，就是默认没有扩展名的文件）
@@ -643,7 +643,7 @@ Uri insertUri = resolver.insert(external, values);
             &#125;
 </code></pre>
 <p>之后可以打开文件管理器，在Download文件夹下mypath文件夹下能找到FILENAME.txt文件，打开能看到里面的内容aaaaaaaaaa。<br>使用SAF的话就更加简单了</p>
-<pre><code>Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+<pre><code class="java">Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 intent.addCategory(Intent.CATEGORY_OPENABLE);
 startActivityForResult(intent, code);
 </code></pre>
@@ -689,16 +689,16 @@ startActivityForResult(intent, code);
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/9.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2015/11/15/2021-12/" class="post-nav-link">
+    <a href="/2016/01/04/2021-18/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>NDK相关(6)</div>
+        <div>JNI和Java共享内存空间</div>
       </div>
       <!-- <div class="content">
-        2.2.2、为单个的类重载 new[]和 delete[]必须小心对象数组的分配。你可能希望调用到被你重载过的 new 
+        （1）Java传到JNI，使用GetByteArrayRegion的方式： 该方法的本质是将Java端数组数据拷贝到本地
       </div> -->
     </a>
   </div>
