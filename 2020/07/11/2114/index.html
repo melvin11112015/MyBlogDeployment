@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Android 11 行为变更 | 😄豐Dの个人博客</title>
+
+  
+    
+<link rel="stylesheet" href="/js/aos/aos.css">
+
+  
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+
+  
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <link href="/js/danmu/barrager.css" rel="stylesheet">
+<script src="/js/danmu/jquery.barrager.js"></script>
+  <body>
+    <!-- 判断是否为黑夜模式 -->
+    <script>
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+      if (isDark) {
+        $(document.body).addClass('darkModel');
+      }
+    </script>
+
+    <header class="header bg-color" 
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
+      <h3 class="drawer-box-head_title">😄豐Dの个人博客</h3>
+      <h5 class="drawer-box-head_desc">Lmfeng Blog</h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://developer.android.google.cn/" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>友情链接</span>
+            </a>
+          </li>
+        
+        <li class="drawer-box-content_item">
+          <a target="_blank" rel="noopener" href="https://github.com/melvin11112015/">
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <span>Github</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <div class="avatar">
+        <img src="/medias/logo.png" alt="logo">
+      </div>
+      <a href="/" class="logo">😄豐Dの个人博客</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a target="_blank" rel="noopener" href="https://developer.android.google.cn/" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>友情链接</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div class="dark">
+  <div class="dark-content">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-moon-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+        
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <div class="close" style="overflow: hidden;">
+          <i class="fa fa-close" aria-hidden="true" style="float:right;" @click.self="cancelDialogVisible()"></i>
+        </div>
+        <h2>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <span class="title">本地搜索</span>
+          <!-- <i class="fa fa-close" style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i> -->
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+  <a target="_blank" rel="noopener" href="https://github.com/melvin11112015/" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+    <div id="he-plugin-simple"></div>
+    <script>
+      WIDGET = {
+        CONFIG: {
+          "modules": "012",
+          "background": 5,
+          "tmpColor": "4A4A4A",
+          "tmpSize": 16,
+          "cityColor": "4A4A4A",
+          "citySize": 16,
+          "aqiSize": 16,
+          "weatherIconSize": 24,
+          "alertIconSize": 18,
+          "padding": "10px 10px 10px 10px",
+          "shadow": "1",
+          "language": "auto",
+          "borderRadius": 5,
+          "fixed": "false",
+          "vertical": "middle",
+          "horizontal": "center",
+          "key": "2784dd3fcb1e4f0f9a9b579bf69641f2"
+        }
+      }
+    </script>
+    <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script> 
+    
+</header>
+    <main class="main" style="margin-top: 60px;">
+      
+ <!-- prismjs 代码高亮 -->
+ 
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg')
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/img/lockup.svg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0"></canvas>
+  
+    <div class="title-box">
+      
+        <span class="title" id="post-detail-header-title"></span>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+          <script>
+            var typed = new Typed("#post-detail-header-title", {
+              strings: ['Android 11 行为变更'],
+              startDelay: 100,
+              typeSpeed: 100,
+              loop: false,
+              backSpeed: 50,
+              showCursor: false
+            });
+          </script>
+        
+    </div>
+  
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      
+      <div class="post-meta">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span class="post-time">2020-07-11</span>
+      </div>
+      
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          <i class="iconfont icontag"></i>
+          
+            <a href="/tags/Android-11/" class="">
+              Android 11
+            </a>
+          
+        </div>
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/Android/" class="">
+              Android
+            </a>
+          
+        </div>
+        
+      </div>
+      <div class="post-content">
+        <h1 id="行为变更：所有应用"><a href="#行为变更：所有应用" class="headerlink" title="行为变更：所有应用"></a>行为变更：所有应用</h1><ul>
+<li>  Table of contents</li>
+<li>  <a href="#privacy">隐私权</a></li>
+<li>  <a href="#exposure-notifications">接触史通知</a></li>
+<li><a href="#security">安全性</a><ul>
+<li>  <a href="#ssl-sockets-conscrypt">SSL 套接字默认情况下使用 Conscrypt SSL 引擎</a></li>
+<li>  <a href="#scudo">Scudo Hardened Allocator</a></li>
+<li>  <a href="#app-usage-stats">应用使用情况统计信息</a></li>
+<li>  <a href="#emulator-5g">针对 5G 的模拟器支持</a></li>
+</ul>
+</li>
+<li><a href="#perf-debug">性能和调试</a><ul>
+<li>  <a href="#jobscheduler_quotas">JobScheduler API 调用限制调试</a></li>
+<li>  <a href="#fdsan">文件描述符排错程序 (fdsan)</a></li>
+</ul>
+</li>
+<li>  <a href="#non-sdk-restrictions">非 SDK 接口限制</a></li>
+<li>  <a href="#maps-v1-removed">V1 版 Google 地图共享库已移除</a></li>
+<li><a href="#interaction-other-apps">与其他应用交互</a><ul>
+<li>  <a href="#share-content-uris">分享内容 URI</a></li>
+</ul>
+</li>
+</ul>
+<p>Android 11 平台包含一些行为变更，这些变更可能会影响您的应用。以下行为变更将影响在 Android 11 上运行的所有应用，无论其采用哪种 <code>targetSdkVersion</code> 都不例外。您应该测试您的应用，然后根据需要进行修改，以适当地支持这些变更（如果适用）。</p>
+<p>此外，请务必查看<a href="/about/versions/11/behavior-changes-11">仅影响以 Android 11 为目标平台的应用的行为变更</a>列表。</p>
+<h2 id="隐私设置"><a href="#隐私设置" class="headerlink" title="隐私设置"></a>隐私设置</h2><p>Android11 引入了一些变更和限制来加强用户隐私保护，其中包括：</p>
+<ul>
+<li>  **<a href="/about/versions/11/privacy/permissions#one-time">单次授权</a>**：让用户可以选择授予更多对位置信息、麦克风和摄像头的临时访问权限。</li>
+<li>  **<a href="/about/versions/11/privacy/permissions#dialog-visibility">权限对话框的可见性</a>**：一再拒绝某项权限表示用户希望“不再询问”。</li>
+<li>  **<a href="/about/versions/11/privacy/data-access-auditing">数据访问审核</a>**：深入了解您的应用在何处访问私密数据，无论是在您的应用自己的代码中，还是在依赖库的代码中。</li>
+<li>  **<a href="/about/versions/11/privacy/permissions#system-alert">系统提醒窗口权限</a>**：根据请求自动向某些类型的应用授予 <code>SYSTEM_ALERT_WINDOW</code> 权限。此外，包含 <code>ACTION_MANAGE_OVERLAY_PERMISSION</code> intent 操作的 intent 始终会将用户转至系统设置中的屏幕。</li>
+<li>  **<a href="/training/articles/user-data-ids#mobile-service-subscriptions">永久 SIM 卡标识符</a>**：在 Android 11 及更高版本中，使用 <a href="/reference/android/telephony/SubscriptionInfo#getIccId()"><code>getIccId()</code></a> 方法访问不可重置的 ICCID 受到限制。该方法会返回一个非 null 的空字符串。如需唯一标识设备上安装的 SIM 卡，请改用 <a href="/reference/android/telephony/SubscriptionInfo#getSubscriptionId()"><code>getSubscriptionId()</code></a> 方法。订阅 ID 会提供一个索引值（从 1 开始），用于唯一识别已安装的 SIM 卡（包括实体 SIM 卡和电子 SIM 卡）。除非设备恢复出厂设置，否则此标识符的值对于给定 SIM 卡是保持不变的。</li>
+</ul>
+<p>如需了解详情，请参阅<a href="/about/versions/11/privacy">隐私设置</a>页面。</p>
+<h2 id="接触史通知"><a href="#接触史通知" class="headerlink" title="接触史通知"></a>接触史通知</h2><p>Android 11 在更新平台时考虑了<a target="_blank" rel="noopener" href="https://www.google.com/covid19/exposurenotifications/">接触史通知系统</a>。用户现已可在 Android 11 上运行接触史通知应用，且无需开启设备位置信息设置。接触史通知系统的设计使得使用该系统的应用无法通过蓝牙扫描推断设备所处的位置，因此，此例外情况仅适用于接触史通知系统。</p>
+<p>为保护用户的隐私，所有其他应用仍无法执行蓝牙扫描，除非用户已开启设备位置信息设置且已授予相应应用位置权限。如需了解详情，请阅读我们的<a target="_blank" rel="noopener" href="https://blog.google/inside-google/company-announcements/update-exposure-notifications">接触史通知最新动态</a>博文。</p>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><h3 id="SSL-套接字默认情况下使用-Conscrypt-SSL-引擎"><a href="#SSL-套接字默认情况下使用-Conscrypt-SSL-引擎" class="headerlink" title="SSL 套接字默认情况下使用 Conscrypt SSL 引擎"></a>SSL 套接字默认情况下使用 Conscrypt SSL 引擎</h3><p>Android 的默认 <code>SSLSocket</code> 实现基于 <a target="_blank" rel="noopener" href="https://github.com/google/conscrypt">Conscrypt</a>。从 Android 11 开始，该实现是在 Conscrypt 的 <code>SSLEngine</code> 之上内部构建的。</p>
+<h3 id="Scudo-Hardened-Allocator"><a href="#Scudo-Hardened-Allocator" class="headerlink" title="Scudo Hardened Allocator"></a>Scudo Hardened Allocator</h3><p>Android 11 在内部使用 <a target="_blank" rel="noopener" href="https://source.android.google.cn/devices/tech/debug/scudo">Scudo Hardened Allocator</a> 为堆分配提供服务。Scudo 能够检测并减轻某些类型的内存安全违规行为。如果您在原生代码崩溃报告中发现与 Scudo 相关的崩溃（例如 <code>Scudo ERROR:</code>），请参阅 <a target="_blank" rel="noopener" href="https://source.android.google.cn/devices/tech/debug/scudo#Troubleshooting">Scudo 问题排查</a>文档。</p>
+<h3 id="应用使用情况统计信息"><a href="#应用使用情况统计信息" class="headerlink" title="应用使用情况统计信息"></a>应用使用情况统计信息</h3><p>为了更好地保护用户，Android11 将每个用户的应用使用情况统计信息存储在<a target="_blank" rel="noopener" href="https://source.android.google.cn/security/encryption/file-based">凭据加密存储空间</a>中。因此，系统和任何应用都无法访问该数据，除非 <a href="/reference/android/os/UserManager#isUserUnlocked(android.os.UserHandle)"><code>isUserUnlocked()</code></a> 返回 <code>true</code>，这发生在出现以下某种情况之后：</p>
+<ul>
+<li>  用户在系统启动后首次解锁其设备。</li>
+<li>  用户在设备上切换到自己的帐号。</li>
+</ul>
+<p>如果您的应用已绑定到 <a href="/reference/android/app/usage/UsageStatsManager"><code>UsageStatsManager</code></a> 的实例，请检查您是否是在用户解锁其设备后在此对象上调用方法。如果并非如此，该 API 现在会返回 null 或空值。</p>
+<h3 id="针对-5G-的模拟器支持"><a href="#针对-5G-的模拟器支持" class="headerlink" title="针对 5G 的模拟器支持"></a>针对 5G 的模拟器支持</h3><p>Android 11 添加了 <a href="/about/versions/11/features/5g">5G API</a>，使您的应用能够添加各种先进的功能。如需在添加这些功能时对其进行测试，您可以使用 <a href="/studio/run/emulator">Android SDK 模拟器</a>的新功能。这项新功能是在模拟器版本 30.0.22 中添加的。选择 5G 网络设置可将 <a href="/reference/android/telephony/TelephonyDisplayInfo"><code>TelephonyDisplayInfo</code></a> 设为 <a href="/reference/android/telephony/TelephonyDisplayInfo#OVERRIDE_NETWORK_TYPE_NR_NSA"><code>OVERRIDE_NETWORK_TYPE_NR_NSA</code></a>，修改带宽估算值，还允许您设置按流量计费性，以验证您的应用是否会对 <a href="/reference/android/net/NetworkCapabilities#NET_CAPABILITY_TEMPORARILY_NOT_METERED"><code>NET_CAPABILITY_TEMPORARILY_NOT_METERED</code></a> 状态的变化做出适当的响应。</p>
+<h2 id="性能和调试"><a href="#性能和调试" class="headerlink" title="性能和调试"></a>性能和调试</h2><h3 id="JobScheduler-API-调用限制调试"><a href="#JobScheduler-API-调用限制调试" class="headerlink" title="JobScheduler API 调用限制调试"></a>JobScheduler API 调用限制调试</h3><p>Android 11 为应用提供调试支持，以便确定有可能超过特定速率限制的 <code>JobScheduler</code> API 调用。开发者可以利用此服务发现潜在的性能问题。对于 <code>debuggable</code> 清单属性设置为 true 的应用，超出速率限制的 <code>JobScheduler</code> API 调用将返回 <a href="/reference/android/app/job/JobScheduler#RESULT_FAILURE"><code>RESULT_FAILURE</code></a>。如此设置限制，正当合理的用例应该就不会受到影响。</p>
+<h3 id="文件描述符排错程序-fdsan"><a href="#文件描述符排错程序-fdsan" class="headerlink" title="文件描述符排错程序 (fdsan)"></a>文件描述符排错程序 (fdsan)</h3><p>Android 10 引入了 <code>fdsan</code>（文件描述符排错程序）。<code>fdsan</code> 检测错误处理文件描述符所有权的错误，例如 use-after-close 和 double-close。在 Android 11 中，<code>fdsan</code> 的默认模式发生了变化。现在，<code>fdsan</code> 会在检测到错误时中止，而以前的行为则是记录警告并继续。如果您在应用中发现由于 <code>fdsan</code> 而导致的崩溃，请参阅 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md"><code>fdsan documentation</code></a>。</p>
+<h2 id="非-SDK-接口限制"><a href="#非-SDK-接口限制" class="headerlink" title="非 SDK 接口限制"></a>非 SDK 接口限制</h2><p>Android11 包含更新后的受限制非 SDK 接口列表（基于与 Android 开发者之间的协作以及最新的内部测试）。在限制使用非 SDK 接口之前，我们会尽可能确保有可用的公开替代方案。</p>
+<p>如果您的应用并非以 Android11 为目标平台，那么其中一些变更可能不会立即对您产生影响。不过，虽然您目前可以使用一些非 SDK 接口（<a href="/distribute/best-practices/develop/restrictions-non-sdk-interfaces#list-names">具体取决于应用的目标 API 级别</a>），但只要您使用任何非 SDK 方法或字段，应用无法运行的风险终归较高。</p>
+<p>如果您不确定自己的应用是否使用了非 SDK 接口，则可以<a href="/distribute/best-practices/develop/restrictions-non-sdk-interfaces#test-for-non-sdk">测试该应用</a>，进行确认。如果您的应用依赖于非 SDK 接口，您应该开始计划迁移到 SDK 替代方案。然而，我们知道某些应用具有使用非 SDK 接口的有效用例。如果您无法为应用中的某项功能找到使用非 SDK 接口的替代方案，则应<a href="/distribute/best-practices/develop/restrictions-non-sdk-interfaces#feature-request">请求新的公共 API</a>。</p>
+<p>如需详细了解此 Android 版本中的变更，请参阅 <a href="/about/versions/11/non-sdk-11">Android 11 中有关限制非 SDK 接口的更新</a>。如需全面了解有关非 SDK 接口的详细信息，请参阅<a href="/distribute/best-practices/develop/restrictions-non-sdk-interfaces">对非 SDK 接口的限制</a>。</p>
+<h2 id="V1-版-Google-地图共享库已移除"><a href="#V1-版-Google-地图共享库已移除" class="headerlink" title="V1 版 Google 地图共享库已移除"></a>V1 版 Google 地图共享库已移除</h2><p>Android11 中已完全移除 V1 版 Google 地图共享库。此库之前已被弃用，并已停止在 Android10 中的应用中运行。对于搭载 Android 9（API 级别 28）或更低版本的设备，之前依赖于此共享库的应用应改用<a target="_blank" rel="noopener" href="https://developers.google.cn/maps/documentation/android-sdk/intro">适用于 Android 的 Google 地图 SDK</a>。</p>
+<p><strong>重要提示</strong>：迁移到 Maps SDK for Android 后，请务必从应用清单文件的 <a href="/guide/topics/manifest/uses-library-element"><code>&lt;uses-library&gt;</code></a> 元素中移除对 v1 版 Google 地图共享库的引用。应用无法再将 <a href="/google/play/filters">Google Play 过滤</a>与 V1 版 Google 地图共享库和 <code>&lt;uses-library&gt;</code> 元素一起使用。</p>
+<h2 id="与其他应用交互"><a href="#与其他应用交互" class="headerlink" title="与其他应用交互"></a>与其他应用交互</h2><h3 id="分享内容-URI"><a href="#分享内容-URI" class="headerlink" title="分享内容 URI"></a>分享内容 URI</h3><p>如果您的应用与其他应用分享内容 URI，相应 intent 必须至少设置以下 intent 标记中的一个，以便<a href="/about/versions/11/privacy/package-visibility-use-cases#grant-uri-access">授予对 URI 的访问权限</a>：<a href="/reference/android/content/Intent#FLAG_GRANT_READ_URI_PERMISSION"><code>FLAG_GRANT_READ_URI_PERMISSION</code></a> 和 <a href="/reference/android/content/Intent#FLAG_GRANT_WRITE_URI_PERMISSION"><code>FLAG_GRANT_WRITE_URI_PERMISSION</code></a>。这样一来，如果其他应用以 Android 11 为目标平台，相应应用仍可访问内容 URI。即使内容 URI 与不属于您的应用的内容提供程序相关联，您的应用也必须包含 intent 标记。</p>
+<p>如果您的应用拥有已与内容 URI 相关联的内容提供程序，请确认<a href="/topic/security/best-practices#disallow-access-to-your-apps-content-providers">该内容提供程序未被导出</a>。我们已建议采用这项安全最佳做法。</p>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/img/xian.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2020/10/03/2104/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> 上一篇:
+        <div>长安秋望</div>
+      </div>
+      
+      <!-- <div class="content">
+        
+楼倚霜树外，镜天无一毫。
+南山与秋色，气势两相高。
+
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/img/lockup.svg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2020/07/11/2115/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fa fa-angle-right"></i>
+        <div>分区存储</div>
+      </div>
+      <!-- <div class="content">
+        android 10提出了分区存储的概念。开发者无法直接获取外部存储的读写权限，用我们平常的话来说就是无法直接读写SD卡
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+    
+    <!-- 评论 -->
+      
+        <div id="myComment">
+          
+        </div>
+      
+  </div>
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>本文目录</span>
+          <div class="toc-open-close">本文目录</div>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+.toc-main ul {
+  counter-reset: show-list;
+}
+.toc-main ul li::before {
+  content: counter(item)".";
+  display: block;
+  position: absolute;
+  left: 12px;
+  top:0;
+}
+.toc > .toc-list {
+  padding-left: 35px;
+}
+.toc>.toc-list li {
+  list-style: decimal;
+}
+.toc-list {
+  padding-left: 25px;
+}
+</style>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    </script>
+  
+</div>
+
+
+    </main>
+    <div class="footer bg-color">
+  <div class="footer-main">
+<!--    <div class="link">
+      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:1730241541@qq.com">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+-->
+    <div class="footer-copyright">
+      Copyright © 2015 - 2021 <a href="/about">Melvin</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
+    </div>
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop top-btn-color border-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+    
+
+    <script src="/js/wrapImage.js"></script>
+    
+    <!-- 爱心点击 -->
+    
+      
+        <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+        <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+        <script src="/js/cursor/explosion.min.js"></script>
+      
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+      <script src="/js/aos/aos.js"></script>
+      <script>
+        // https://github.com/michalsnik/aos
+        const themeOffset = parseInt('120') || 120;
+        const themeDelay = parseInt('0')|| 0;
+        const themeDuration = parseInt('400') || 400;
+        const themeEasing = 'ease' || 'ease';
+        const themeOnce = eval('true') || false;
+        const themeMirror = eval('false') || false;
+        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
+        AOS.init({
+          // Global settings:
+          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+          initClassName: 'aos-init', // class applied after initialization
+          animatedClassName: 'aos-animate', // class applied on animation
+          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+          offset: themeOffset, // offset (in px) from the original trigger point
+          delay: themeDelay, // values from 0 to 3000, with step 50ms
+          duration: themeDuration, // values from 0 to 3000, with step 50ms
+          easing: themeEasing, // default easing for AOS animations
+          once: themeOnce, // whether animation should happen only once - while scrolling down
+          mirror: themeMirror, // whether elements should animate out while scrolling past them
+          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
+
+        });
+      </script>
+    
+
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+<div id="appCopy">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#appCopy',
+    data: {
+    },
+    computed: {
+    },
+    mounted() {
+      const that = this;
+      //  监听 ctrl + c事件  
+      $(document).unbind('keypress').bind('keypress', function (e) {
+        if (e.ctrlKey && e.keyCode == 67) {
+          doSomething();
+          // 返回false, 防止重复触发copy事件  
+          return false;
+        }
+      })
+
+      // 鼠标右键的复制事件  
+      $(document).unbind('copy').bind('copy', function (e) {
+        doSomething();
+        // console.log('右键复制 监听成功');
+      });
+
+      function doSomething() {
+        that.$notify({
+          title: "成功",
+          content: "代码已复制，请遵守相关授权协议。",
+          type: 'success'
+        })
+        // console.log('ctrl + c 监听成功');  
+      }
+    },
+    methods: {
+    },
+    created() { }
+  })
+</script>
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能 -->
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fa fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+
+    <script src="/js/lazyload/lazyload@1.9.1.js"></script>
+    <script>
+      $(function() {
+        $("div.lazyload, img.lazyload, a.lazyload").lazyload(
+            {
+                effect: "fadeIn",
+                placeholder: "https://img10.360buyimg.com/ddimg/jfs/t1/159345/8/2271/222193/5ff7b36fEe49f5663/a95287c20385127f.gif"    //图片未加载出来时显示的占位图
+            }
+        );
+    });
+    </script>
+    
+    <script src="/js/app.js"></script>
+  </body>
+</html>
